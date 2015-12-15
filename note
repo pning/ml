@@ -1,0 +1,4 @@
+向量vector c  同一类型数据 索引从1开始
+              函数 seq() cut() table() stem() hist()
+因子factor  函数 ordered()
+数据框(数据库表)data frame  函数nrow() ncol() str() dim() 
