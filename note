@@ -1,4 +1,17 @@
-向量vector c  同一类型数据 索引从1开始
-              函数 seq() cut() table() stem() hist()
+数据结构
+向量vector c  同一类型数据 索引从1开始 函数 seq() cut() table() stem() hist()
 因子factor  函数 ordered()
-数据框(数据库表)data frame  函数nrow() ncol() str() dim() 
+数据框(数据库表)data frame  函数nrow() ncol() str() dim() head() tail() sort() subset() order()
+矩阵 matrix 都是 数字
+对象容器list 其他对象的容器
+vector,factor,data frame,matrix,list
+
+帮助
+help()
+?
+example()
+??
+RSiteSearch()
+apropos()
+vignette()
+http://stackoverflow.com
