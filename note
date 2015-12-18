@@ -15,3 +15,19 @@ RSiteSearch()
 apropos()
 vignette()
 http://stackoverflow.com
+do x in R package
+
+导入数据
+
+画图
+ggplot(diamonds,aes(x=carat,y=price,color=clarity,group=1))+geom_point()+geom_smooth(se=FALSE)+ggtitle("test")+theme(plot.title=element_text((vjust=2)))
+aes(x=,y=,color=)
+head(apropos("^stat_"),10)
+ggplot 图层叠加  facet_wrap 分片 
+geom_ 几何对象
+stat_ 统计
+scale 标尺color fill labels
+facet 数据分组
+坐标系统
+布局
+ggsave()
