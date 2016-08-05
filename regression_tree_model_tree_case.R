@@ -1,0 +1,28 @@
+wine<-read.csv("data/winequality-white.csv",sep=";")
+head(wine)
+dim(wine)
+require(ggplot2)
+ggplot(wine,aes(quality))+geom_histogram(binwidth=0.2)
+require(caret)
+set.seed(2014)
+inTranin=createDataPartition(y=wine$quality,p=0.8,list=FALSE)
+wine_train=wine[inTranin,]
+wine_test=wine[-inTranin,]
+require(rpart)
+m=rpart(quality~.,data=wine_train)
+summary(m)
+p=predict(m,wine_test,type="vector")
+summary(p)
+summary(wine_test$quality)
+require(rpart.plot)
+rpart.plot(m,digits = 3)
+cor(p,wine_test$quality)
+MAE=function(actual,predicted){
+  mean(abs(actual-predicted))
+}
+MAE(p,wine_test$quality)
+require(RWeka)
+m=M5P(quality~.,data = wine_train)
+p=predict(m,wine_test)
+cor(p,wine_test$quality)
+summary(p)

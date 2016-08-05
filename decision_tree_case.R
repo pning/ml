@@ -1,6 +1,6 @@
-install.packages("rpart")
-install.packages("partykit")
-install.packages("rpart.plot")
+#install.packages("rpart")
+#install.packages("partykit")
+#install.packages("rpart.plot")
 
 require(rpart)
 require(partykit)
@@ -142,3 +142,12 @@ credit_cost_pred=predict(credit_cost,credit_test)
 require(gmodels)
 CrossTable(credit_test$Good.Loan,credit_cost_pred,prop.chisq = FALSE,prop.c = FALSE,prop.r = FALSE,
            dnn = c('actual loan status','predicted loan status'))
+
+
+require(caret)
+folds=createFolds(credit$Good.Loan,k=10)
+str(folds)
+credit_train=credit[-folds$Fold01,]
+credit_test=credit[folds$Fold01,]
+
+
