@@ -21,7 +21,7 @@ D. Recommender 1) Content-Based Filtering
 
 E. Association Rule  Apriori
 
-F. SVM
+F. SVM MMH kernel kernlab/e1071/ROCR
 
 Benchmark
 classification
