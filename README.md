@@ -21,6 +21,8 @@ D. Recommender 1) Content-Based Filtering
 
 E. Association Rule  Apriori
 
+F. SVM
+
 Benchmark
 classification
 regreeion
