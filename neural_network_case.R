@@ -1,0 +1,50 @@
+#install.packages("neuralnet")
+require(neuralnet)
+require(caret)
+data(iris)
+inTrain=createDataPartition(y=iris$Species,p=0.8,list=F)
+iris_train=iris[inTrain,]
+iris_test=iris[-inTrain,]
+iris_train=cbind(iris_train,iris_train$Species=="setosa")
+iris_train=cbind(iris_train,iris_train$Species=="versicolor")
+iris_train=cbind(iris_train,iris_train$Species=="virginica")
+names(iris_train)[6]="setosa"
+names(iris_train)[7]="versicolor"
+names(iris_train)[8]="virginica"
+nn=neuralnet(setosa+versicolor+virginica~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width,
+             data=iris_train,
+             hidden=c(3))
+plot(nn)
+mypredict=compute(nn,iris_test[-5])$net.result
+maxidx=function(arr){
+  return(which(arr==max(arr)))
+}
+idx=apply(mypredict,1,maxidx)
+predict_species=c("setosa","versicolor","virginica")
+prediction=predict_species[idx]
+table(prediction,iris_test$Species)
+
+concreate=read.csv("data/Concrete_Data.csv")
+str(concreate)
+summary(concreate)
+normalize=function(x){
+  return((x-min(x))/(max(x)-min(x)))
+}
+concreate_norm=as.data.frame(lapply(concreate, normalize))
+summary(concreate_norm)
+require(caret)
+inTrain=createDataPartition(y=concreate_norm$strength,p=0.8,list=FALSE)
+concreate_train=concreate_norm[inTrain,]
+concreate_test=concreate_norm[-inTrain,]
+require(neuralnet)
+concreate_model=neuralnet(strength~Cement+Slag+Ash+Water+Superplasticizer+CoarseAgg+FineAgg+Age,
+                          data=concreate_train,hidden = 5)
+plot(concreate_model)
+model_results=compute(concreate_model,concreate_test[1:8])
+predicted_strength=model_results$net.result
+cor(predicted_strength,concreate_test$strength)
+MAE<-function(actual,predicted){
+  mean(abs(actual-predicted))
+}
+MAE(concreate_test$strength,predicted_strength)
+
